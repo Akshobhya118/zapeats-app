@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero">
+    <h1>Welcome to ZapEats 🍔</h1>
+    <p>Order your favourite food from the best restaurants near you!</p>
+    <a href="{{ url_for('restaurant.list_restaurants') }}" class="btn">Browse Restaurants</a>
+</div>
+
+<div class="add-restaurant">
+    <h2>Add a Restaurant</h2>
+    <form method="POST" action="{{ url_for('restaurant.add_restaurant') }}">
+        <div class="form-group">
+            <label>Restaurant Name</label>
+            <input type="text" name="name" placeholder="Enter restaurant name" required>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" name="location" placeholder="Enter location" required>
+        </div>
+        <div class="form-group">
+            <label>Cuisine Type</label>
+            <input type="text" name="cuisine" placeholder="Enter cuisine type" required>
+        </div>
+        <button type="submit" class="btn">Add Restaurant</button>
+    </form>
+</div>
+{% endblock %}

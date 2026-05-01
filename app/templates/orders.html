@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2>My Orders</h2>
+</div>
+
+{% if items %}
+<div class="cart-container">
+    <h3>Your Cart</h3>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in items %}
+            <tr>
+                <td>{{ entry.item.name }}</td>
+                <td>₹{{ entry.item.price }}</td>
+                <td>{{ entry.quantity }}</td>
+                <td>₹{{ entry.subtotal }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('cart.remove_from_cart', item_id=entry.item.id) }}">
+                        <button type="submit" class="btn btn-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total: ₹{{ total }}</h3>
+    <form method="POST" action="{{ url_for('order.place_order') }}">
+        <button type="submit" class="btn">Place Order</button>
+    </form>
+</div>
+
+{% elif orders %}
+<div class="orders-container">
+    {% for o in orders %}
+    <div class="order-card">
+        <p><strong>Order #{{ o.id }}</strong></p>
+        <p>Status: {{ o.status }}</p>
+        <p>Total: ₹{{ o.total_amount }}</p>
+        <p>Date: {{ o.created_at.strftime('%d-%m-%Y %H:%M') }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<p>No orders or cart items found!</p>
+{% endif %}
+{% endblock %}

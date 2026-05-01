@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <h2>All Restaurants</h2>
+</div>
+
+<div class="restaurant-grid">
+    {% for r in restaurants %}
+    <div class="restaurant-card">
+        <div class="restaurant-info">
+            <h3>{{ r.name }}</h3>
+            <p>📍 {{ r.location }}</p>
+            <p>🍽️ {{ r.cuisine }}</p>
+            <p>⭐ {{ r.rating }}</p>
+            <a href="{{ url_for('restaurant.restaurant_detail', id=r.id) }}" class="btn">View Menu</a>
+        </div>
+    </div>
+    {% else %}
+    <p>No restaurants available yet!</p>
+    {% endfor %}
+</div>
+{% endblock %}

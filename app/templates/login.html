@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Login to ZapEats</h2>
+    <form method="POST" action="{{ url_for('auth.login') }}">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+        <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+    </form>
+</div>
+{% endblock %}
